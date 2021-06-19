@@ -1,15 +1,8 @@
-::-webkit-scrollbar{
-    display: none;
-}
-
 .home{
     width: 100%;
     min-height: 95vh;
     padding-top: 100px;
     margin: 0 auto;
-}
-.content{
-    padding: 100px;
 }
 
 .content-home{

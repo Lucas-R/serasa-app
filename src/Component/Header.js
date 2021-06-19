@@ -1,7 +1,9 @@
 import React, {useState} from "react";
-import "../Styles/Header.css";
+import "../Styles/Header.css"
+import { useNavigate } from "react-router-dom";
 
 export default function Header(){
+    const navigate = useNavigate();
 
     function FormAvaliation({
         initialValues
@@ -38,10 +40,12 @@ export default function Header(){
 
     function handleClickSubmit(e) {
         e.preventDefault();
-        console.log(form.values.nome, form.values.cpf, form.values.email, form.values.ocup, form.values.renda);
+        const link = (form.values.nome + '/' + form.values.cpf + '/' + form.values.email + '/' + form.values.ocup + '/' + form.values.renda);
         document.getElementById("form-avaliation").classList.remove("active");
         document.getElementById("content-home").classList.add("disable");
         document.getElementById("content-proposta").classList.add("active");
+        console.log(link)
+        navigate('/Propostas/' + link + "/0");
     }
 
     const handleClickMenu = () => {
@@ -52,7 +56,7 @@ export default function Header(){
     return(
         <header className="header">
             <nav>
-                <a className="logo" href="/Propostas"> Crédito Para Todxs </a>
+                <a className="logo" href="/"> Crédito Para Todxs </a>
                 <div className="menu" onClick={handleClickMenu}>
                     <button className="nav-button"> Consultar </button>
                 </div>
@@ -60,11 +64,11 @@ export default function Header(){
                     <h1> Agora precisamos que você se identifique... </h1>
                     <div className="box-input">
                         <label className="form-label"> Nome completo: </label>
-                        <input name="nome" onChange={form.handleChange} value={form.values.nome} className="form-input" type="text" placeholder="ex.: Lucas Rodrigues"/>
+                        <input name="nome" onChange={form.handleChange} value={form.values.nome} className="form-input" type="text" placeholder="Ex.: Lucas Rodrigues"/>
                     </div>
                     <div className="box-input">
                         <label className="form-label"> CPF : </label>
-                        <input name="cpf" onChange={form.handleChange} value={form.values.cpf} className="form-input" type="text" placeholder="ex.: 000.000.000-00"/>
+                        <input name="cpf" onChange={form.handleChange} value={form.values.cpf} className="form-input" type="text" placeholder="Ex.: 000.000.000-00"/>
                     </div>
                     <div className="box-input">
                         <label className="form-label"> Email : </label>
@@ -72,13 +76,7 @@ export default function Header(){
                     </div>
                     <div className="box-input">
                         <label className="form-label"> Ocupação : </label>
-                        <select name="ocup" onChange={form.handleChange} value={form.values.ocup} className="form-input">
-                            <option value="option-1"> Opção um </option>
-                            <option value="option-2"> Opção dois </option>
-                            <option value="option-3"> Opção três </option>
-                            <option value="option-4"> Opção quatro </option>
-                            <option value="option-5"> Opção cinco </option>
-                        </select>
+                        <input name="ocup" onChange={form.handleChange} value={form.values.ocup} className="form-input" type="text" placeholder=" Ex.: Médico "/>
                     </div>
                     <div className="box-input">
                         <label className="form-label"> Valor da salario : </label>

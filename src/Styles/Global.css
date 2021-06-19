@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
 
+::-webkit-scrollbar{
+    display: none;
+}
+
 *{
     margin: 0;
     padding: 0;
@@ -13,4 +17,8 @@ body, html{
     overflow-x: hidden;
     outline: none;
     color: #333333;
+}
+
+.content{
+    padding: 100px;
 }
