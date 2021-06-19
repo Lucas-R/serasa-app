@@ -1,0 +1,100 @@
+.content-proposta{
+    display: none;
+}
+
+.content-proposta.active{
+    display: block;
+}
+
+.content-proposta h1{
+    margin-bottom: 15px;
+}
+
+.propostas{
+    width: 33%;
+    min-height: 200px;
+    margin-bottom: 20px;
+    float: left;
+}
+
+.proposta{
+    width: 90%;
+    padding: 20px;
+    margin: 0 auto;
+    box-sizing: border-box;
+    border: 1px solid #009EE3;
+    border-radius: 4px;
+    float: left;
+}
+
+.proposta-header{
+    margin: 10px auto;
+}
+
+.proposta-button{
+    width: 100%;
+    height: 30px;
+    margin: 5px auto;
+    color: #FFF;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.proposta-more{
+    background: #FFF;
+    border: 1px solid #009EE3;
+    color: #009EE3;
+    transition: 0.3s;
+}
+
+.proposta-more:hover{
+    background: #009EE3;
+    color: #FFF;
+}
+
+.proposta-confirm{
+    background: #FFF;
+    border: 1px solid #e63888;
+    color: #e63888;
+    transition: 0.3s;
+}
+
+.proposta-confirm:hover{
+    background: #e63888;
+    color: #FFF;
+}
+
+@media (max-width: 999px){
+    .propostas{
+        width: 50%;
+    }
+}
+
+@media (max-width: 550px){
+    .content{
+        padding: 0;
+    }
+    .propostas{
+        width: 100%;
+        display: flex;
+        align-items: center;
+    }
+
+    .proposta-title{
+        font-size: 1.5em;
+        padding: 20px;
+    }
+}
+
+@media (max-width: 360px){
+    .content{
+        padding: 0px;
+    }
+
+    .propostas{
+        width: 100%;
+        display: flex;
+        align-items: center;
+    }
+}

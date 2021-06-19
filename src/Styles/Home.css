@@ -1,6 +1,30 @@
+::-webkit-scrollbar{
+    display: none;
+}
+
 .home{
-    width: 90%;
-    height: auto;
+    width: 100%;
+    min-height: 95vh;
+    padding-top: 100px;
     margin: 0 auto;
-    background: #FFF;
+}
+.content{
+    padding: 100px;
+}
+
+.content-home{
+    width: 100%;
+    min-height: 50vh;
+    background: #009EE3;
+    transition: 0.3s;
+    
+}
+
+.content-home h1, h2, h3{
+    padding: 5px;
+    color: #FFF;
+}
+
+.content-home.disable{
+    display: none;
 }

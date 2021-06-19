@@ -36,12 +36,12 @@ export default function Header(){
         }  
     });
 
-    
-
     function handleClickSubmit(e) {
         e.preventDefault();
         console.log(form.values.nome, form.values.cpf, form.values.email, form.values.ocup, form.values.renda);
         document.getElementById("form-avaliation").classList.remove("active");
+        document.getElementById("content-home").classList.add("disable");
+        document.getElementById("content-proposta").classList.add("active");
     }
 
     const handleClickMenu = () => {
@@ -52,11 +52,12 @@ export default function Header(){
     return(
         <header className="header">
             <nav>
-                <a className="logo" href="/"><h1> Credito Para Todox </h1></a>
+                <a className="logo" href="/Propostas"> Crédito Para Todxs </a>
                 <div className="menu" onClick={handleClickMenu}>
-                    <button className="form-button"> Consultar </button>
+                    <button className="nav-button"> Consultar </button>
                 </div>
                 <form className="form-avaliation" id="form-avaliation" onSubmit={handleClickSubmit}>
+                    <h1> Agora precisamos que você se identifique... </h1>
                     <div className="box-input">
                         <label className="form-label"> Nome completo: </label>
                         <input name="nome" onChange={form.handleChange} value={form.values.nome} className="form-input" type="text" placeholder="ex.: Lucas Rodrigues"/>
