@@ -1,57 +1,29 @@
-import React, {useState} from "react";
-import "../Styles/Header.css"
+import React from "react";
 import { useNavigate } from "react-router-dom";
+import { Formik, Field, Form } from "formik";
+import Schema from "./Schema";
+import "../Styles/Header.css"
 
 export default function Header(){
     const navigate = useNavigate();
-
-    function FormAvaliation({
-        initialValues
-    }){
-    
-
-        const [values, setValues] = useState(initialValues);
-    
-    
-        function handleChange(ev){
-            const fieldName = ev.target.getAttribute('name');
-            const value = ev.target.value;
-            setValues({
-                ...values,
-                [fieldName]: value,
-            });
-        }
-        return{
-            values,  
-            handleChange
-        }
-    }
-
-
-    const form = FormAvaliation({
-        initialValues: {
-            nome: '',
-            cpf: '',
-            email: '',
-            ocup: '',
-            renda: ''
-        }  
-    });
-
-    function handleClickSubmit(e) {
-        e.preventDefault();
-        const link = (form.values.nome + '/' + form.values.cpf + '/' + form.values.email + '/' + form.values.ocup + '/' + form.values.renda);
+    function onSubmit(values){
+        document.getElementById("content-proposta").classList.add("active");
         document.getElementById("form-avaliation").classList.remove("active");
         document.getElementById("content-home").classList.add("disable");
-        document.getElementById("content-proposta").classList.add("active");
-        console.log(link)
+        const link = (
+            values.nome + '/' + 
+            values.cpf + '/' + 
+            values.email + '/' + 
+            values.ocup + '/' + 
+            values.renda
+        );
+
         navigate('/Propostas/' + link + "/0");
     }
-
+    
     const handleClickMenu = () => {
         document.getElementById("form-avaliation").classList.toggle("active");
     }
-
 
     return(
         <header className="header">
@@ -60,31 +32,52 @@ export default function Header(){
                 <div className="menu" onClick={handleClickMenu}>
                     <button className="nav-button"> Consultar </button>
                 </div>
-                <form className="form-avaliation" id="form-avaliation" onSubmit={handleClickSubmit}>
-                    <h1> Agora precisamos que você se identifique... </h1>
-                    <div className="box-input">
-                        <label className="form-label"> Nome completo: </label>
-                        <input name="nome" onChange={form.handleChange} value={form.values.nome} className="form-input" type="text" placeholder="Ex.: Lucas Rodrigues"/>
-                    </div>
-                    <div className="box-input">
-                        <label className="form-label"> CPF : </label>
-                        <input name="cpf" onChange={form.handleChange} value={form.values.cpf} className="form-input" type="text" placeholder="Ex.: 000.000.000-00"/>
-                    </div>
-                    <div className="box-input">
-                        <label className="form-label"> Email : </label>
-                        <input name="email" onChange={form.handleChange} value={form.values.email} className="form-input" type="text" placeholder="Lucas@email.com"/>
-                    </div>
-                    <div className="box-input">
-                        <label className="form-label"> Ocupação : </label>
-                        <input name="ocup" onChange={form.handleChange} value={form.values.ocup} className="form-input" type="text" placeholder=" Ex.: Médico "/>
-                    </div>
-                    <div className="box-input">
-                        <label className="form-label"> Valor da salario : </label>
-                        <input name="renda" onChange={form.handleChange} value={form.values.renda} className="form-input" type="text" placeholder="Ex.: R$ 1.000,00"/>
-                        <small> Se houver renda extra, somar os valores. </small>
-                    </div>
-                    <button type="submit" className="form-button"> Avaliar </button>
-                </form>
+                <Formik 
+                    validationSchema = {Schema}
+                    validateOnMount
+                    onSubmit = {onSubmit}
+                    initialValues = {{
+                        nome: '',
+                        cpf: '',
+                        email: '',
+                        ocup: '',
+                        renda: ''
+                    }}
+                    render  = {({errors, isValid}) => (
+                        <Form className="form-avaliation" id="form-avaliation">
+                            <h1> Agora precisamos que você se identifique... </h1>
+                            <div className="box-input">
+                                <label className="form-label"> Nome completo: {errors.nome && (<span>{errors.nome}</span>)}</label>
+                                <Field name="nome" type="text"  placeholder="Ex.: Lucas Rodrigues" className="form-input" />
+                            </div>
+                            <div className="box-input">
+                                <label className="form-label"> CPF : {errors.cpf && (<span>{errors.cpf}</span>)}</label>
+                                <Field name="cpf" className="form-input" type="text" placeholder="Ex.: 000.000.000-00"/>
+                            </div>
+                            <div className="box-input">
+                                <label className="form-label"> Email : {errors.email && (<span>{errors.email}</span>)}</label>
+                                <Field  name="email" className="form-input" type="text" placeholder="Lucas@email.com"/>
+                            </div>
+                            <div className="box-input">
+                                <label className="form-label"> Ocupação : {errors.ocup && (<span>{errors.ocup}</span>)}</label>
+                                <Field  name="ocup" className="form-input" type="text" placeholder=" Ex.: Médico "/>
+                            </div>
+                            <div className="box-input">
+                                <label className="form-label"> Valor da salario : {errors.renda && (<span>{errors.renda}</span>)}</label>
+                                <Field as="select" name="renda" className="form-input">
+                                    <option value="class-F"> até R$1000,00 </option>
+                                    <option value="class-E"> entre R$1000,00 e R$2.000,00</option>
+                                    <option value="class-D"> entre R$2000,00 e R$3.000,00</option>
+                                    <option value="class-C"> entre R$3000,00 e R$4.000,00</option>
+                                    <option value="class-B"> entre R$4000,00 e R$4.000,00</option>
+                                    <option value="class-A"> a cima de R$5.000,00</option>
+                                </Field>
+                                <small> Se houver renda extra, somar os valores. </small>
+                            </div>
+                            <button type="submit" className="form-button" disabled={!isValid}> Avaliar </button>
+                        </Form>
+                    )}
+                />
             </nav>
         </header>
     );
