@@ -23,4 +23,8 @@ export default Yup.object().shape({
         .min(5)
         .required('Ocupação obrigatório')
         .matches(/^[aA-zZ\s]/, " Caracter invalido "),
+
+    renda: Yup
+        .string()
+        .required('Selecione a renda que se encaixa')
 })

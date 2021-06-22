@@ -22,3 +22,9 @@ body, html{
 .content{
     padding: 100px;
 }
+
+@media (max-width: 550px){
+    .content{
+        padding: 20px;
+    }
+}

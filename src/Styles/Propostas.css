@@ -33,6 +33,7 @@
 
 .proposta-desc{
     height: 55px;
+    margin-bottom: 15px;
     overflow: hidden;
 }
 
@@ -80,6 +81,7 @@
     display: none;
     align-items: center;
     justify-content: center;
+    z-index: 0;
 }
 
 .lente.active{
@@ -128,9 +130,6 @@
 }
 
 @media (max-width: 550px){
-    .content{
-        padding: 0;
-    }
     .propostas{
         width: 100%;
         display: flex;
@@ -144,10 +143,6 @@
 }
 
 @media (max-width: 360px){
-    .content{
-        padding: 0px;
-    }
-
     .propostas{
         width: 100%;
         display: flex;

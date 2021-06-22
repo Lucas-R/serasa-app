@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Formik, Field, Form } from "formik";
 import Schema from "./Schema";
 import "../Styles/Header.css"
+import userEvent from "@testing-library/user-event";
 
 export default function Header(){
     const navigate = useNavigate();
@@ -43,7 +44,7 @@ export default function Header(){
                         ocup: '',
                         renda: ''
                     }}
-                    render  = {({errors, isValid}) => (
+                    render  = {({values, errors, isValid}) => (
                         <Form className="form-avaliation" id="form-avaliation">
                             <h1> Agora precisamos que você se identifique... </h1>
                             <div className="box-input">
@@ -65,12 +66,13 @@ export default function Header(){
                             <div className="box-input">
                                 <label className="form-label"> Valor da salario : {errors.renda && (<span>{errors.renda}</span>)}</label>
                                 <Field as="select" name="renda" className="form-input">
-                                    <option value="class-F"> até R$1000,00 </option>
-                                    <option value="class-E"> entre R$1000,00 e R$2.000,00</option>
-                                    <option value="class-D"> entre R$2000,00 e R$3.000,00</option>
-                                    <option value="class-C"> entre R$3000,00 e R$4.000,00</option>
-                                    <option value="class-B"> entre R$4000,00 e R$4.000,00</option>
-                                    <option value="class-A"> a cima de R$5.000,00</option>
+                                    <option value="0"> Selecione sua renda </option>
+                                    <option value="1"> Renda até R$1000,00 </option>
+                                    <option value="2"> Renda até R$2.000,00 </option>
+                                    <option value="3"> Renda até R$3.000,00</option>
+                                    <option value="4"> Renda até R$4.000,00</option>
+                                    <option value="5"> Renda até R$4.000,00</option>
+                                    <option value="6"> a cima de R$5.000,00</option>
                                 </Field>
                                 <small> Se houver renda extra, somar os valores. </small>
                             </div>
